@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Registration</title>
+    <link rel="stylesheet" href="student-registration.css">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <div class="brand">Student Management</div>
+            <div class="nav-links">
+                <a class="active" href="student-registration.html">Student Registration</a>
+                <a href="student-records.html">Student Records</a>
+                <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+            </div>
+        </nav>
+
+        <div class="card">
+            <h1>Student Registration</h1>
+            <p class="subtitle">Add a new student to your class roster.</p>
+
+            <form id="studentForm">
+                <input type="text" id="name" placeholder="Full Name" required>
+                <input type="text" id="rollNumber" placeholder="Roll Number" required>
+                <input type="text" id="department" placeholder="Department" required>
+                <input type="email" id="email" placeholder="Email Address" required>
+                <button type="submit">Register Student</button>
+                <p id="formMessage" class="message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-test.js"></script>
+    <script src="student-registration.js"></script>
+</body>
+</html>

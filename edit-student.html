@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Student</title>
+    <link rel="stylesheet" href="edit-student.css">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <div class="brand">Student Management</div>
+            <div class="nav-links">
+                <a href="student-registration.html">Student Registration</a>
+                <a href="student-records.html">Student Records</a>
+                <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+            </div>
+        </nav>
+
+        <div class="card">
+            <h1>Edit Student</h1>
+            <p class="subtitle">Update the selected student's information below.</p>
+
+            <form id="editStudentForm">
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Full Name" required>
+
+                <label for="rollNumber">Roll Number</label>
+                <input type="text" id="rollNumber" name="rollNumber" placeholder="Roll Number" required>
+
+                <label for="department">Department</label>
+                <input type="text" id="department" name="department" placeholder="Department" required>
+
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="Email Address" required>
+
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Save Changes</button>
+                    <button type="button" id="cancelBtn" class="secondary-btn">Cancel</button>
+                </div>
+
+                <p id="formMessage" class="message"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+    <script src="supabase-test.js"></script>
+    <script src="edit-student.js"></script>
+</body>
+</html>
