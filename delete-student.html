@@ -4,42 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delete Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="delete-student.css">
 </head>
 <body>
     <div class="page-shell">
         <nav class="top-nav">
-            <div class="brand">Student Management</div>
+            <a class="brand" href="student-registration.html">
+                <span class="brand-mark">SM</span>
+                <span>Student Hub</span>
+            </a>
             <div class="nav-links">
-                <a href="student-registration.html">Student Registration</a>
-                <a href="student-records.html">Student Records</a>
-                <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+                <a class="nav-link" href="student-registration.html">Student Registration</a>
+                <a class="nav-link" href="student-records.html">Student Records</a>
+                <button id="logoutBtn" class="nav-action logout-btn" type="button">Logout</button>
             </div>
         </nav>
 
-        <div class="card">
-            <h1>Delete Student</h1>
-            <p class="subtitle">Review the student details before deleting this record.</p>
+        <section class="card">
+            <div class="card-header">
+                <div>
+                    <p class="eyebrow">Confirmation</p>
+                    <h1>Delete Student</h1>
+                    <p class="subtitle">Review the student details before deleting this record.</p>
+                </div>
+                <div class="status-pill">Danger</div>
+            </div>
 
             <div class="details-card">
-                <div class="detail-row"><span class="label">Name:</span><span id="studentName">-</span></div>
-                <div class="detail-row"><span class="label">Roll Number:</span><span id="studentRoll">-</span></div>
-                <div class="detail-row"><span class="label">Department:</span><span id="studentDepartment">-</span></div>
-                <div class="detail-row"><span class="label">Email:</span><span id="studentEmail">-</span></div>
+                <div class="detail-row"><span class="label">Name</span><span id="studentName">-</span></div>
+                <div class="detail-row"><span class="label">Roll Number</span><span id="studentRoll">-</span></div>
+                <div class="detail-row"><span class="label">Department</span><span id="studentDepartment">-</span></div>
+                <div class="detail-row"><span class="label">Email</span><span id="studentEmail">-</span></div>
             </div>
 
             <div class="warning-box">
-                <p><strong>Warning:</strong> Are you sure you want to permanently delete this student?</p>
+                <p><strong>Warning:</strong> This action is permanent and will remove the student record from the system.</p>
             </div>
 
             <div class="form-actions">
-                <button id="deleteBtn" class="danger-btn" type="button">Delete</button>
+                <button id="deleteBtn" class="danger-btn" type="button">Delete Student</button>
                 <button id="cancelBtn" class="secondary-btn" type="button">Cancel</button>
             </div>
 
             <p id="formMessage" class="message"></p>
-        </div>
+        </section>
     </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="supabase-test.js"></script>

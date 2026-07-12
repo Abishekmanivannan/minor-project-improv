@@ -4,26 +4,40 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Student Records</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="student-records.css">
 </head>
 <body>
     <div class="page-shell">
         <nav class="top-nav">
-            <div class="brand">Student Management</div>
+            <a class="brand" href="student-registration.html">
+                <span class="brand-mark">SM</span>
+                <span>Student Hub</span>
+            </a>
             <div class="nav-links">
-                <a href="student-registration.html">Student Registration</a>
-                <a class="active" href="student-records.html">Student Records</a>
-                <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+                <a class="nav-link" href="student-registration.html">Student Registration</a>
+                <a class="nav-link active" href="student-records.html">Student Records</a>
+                <button id="logoutBtn" class="nav-action logout-btn" type="button">Logout</button>
             </div>
         </nav>
 
-        <div class="records-header">
-            <h1>Student Records</h1>
-            <input type="text" id="searchInput" placeholder="Search by name, roll number, department, or email">
-        </div>
+        <section class="records-header">
+            <div>
+                <p class="eyebrow">Directory</p>
+                <h1>Student Records</h1>
+            </div>
+            <label class="search-shell">
+                <span class="search-icon">🔎</span>
+                <input type="text" id="searchInput" placeholder="Search by name, roll number, department, or email">
+            </label>
+        </section>
 
         <div id="recordsContainer" class="records-grid"></div>
     </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="supabase-test.js"></script>

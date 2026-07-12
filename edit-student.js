@@ -2,12 +2,34 @@ const form = document.getElementById("editStudentForm");
 const formMessage = document.getElementById("formMessage");
 const cancelBtn = document.getElementById("cancelBtn");
 const logoutBtn = document.getElementById("logoutBtn");
+const toastContainer = document.getElementById("toastContainer");
 let currentStudentId = null;
 
 function showMessage(text, type = "info") {
     if (!formMessage) return;
     formMessage.textContent = text;
     formMessage.className = `message ${type}`;
+}
+
+function showToast(text, type = "info") {
+    if (!toastContainer) return;
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.innerHTML = text;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2600);
+}
+
+function setLoading(isLoading) {
+    const submitButton = form?.querySelector("button[type='submit']");
+    if (!submitButton) return;
+
+    submitButton.disabled = isLoading;
+    submitButton.innerHTML = isLoading ? '<span class="spinner"></span>Saving...' : 'Save Changes';
 }
 
 function redirectToRecords() {
@@ -22,6 +44,7 @@ function getStudentIdFromUrl() {
 async function requireAuth() {
     if (!window.supabaseClient) {
         showMessage("Supabase is unavailable. Please refresh the page.", "error");
+        showToast("Supabase is unavailable.", "error");
         return false;
     }
 
@@ -29,6 +52,7 @@ async function requireAuth() {
 
     if (error) {
         showMessage(error.message, "error");
+        showToast(error.message, "error");
         return false;
     }
 
@@ -84,9 +108,13 @@ if (form) {
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
         showMessage("", "info");
+        setLoading(true);
 
         const authenticated = await requireAuth();
-        if (!authenticated) return;
+        if (!authenticated) {
+            setLoading(false);
+            return;
+        }
 
         const name = document.getElementById("name").value.trim();
         const rollNumber = document.getElementById("rollNumber").value.trim();
@@ -96,6 +124,8 @@ if (form) {
         const validation = validateStudentData(name, rollNumber, department, email);
         if (!validation.valid) {
             showMessage(validation.message, "error");
+            showToast(validation.message, "error");
+            setLoading(false);
             return;
         }
 
@@ -103,6 +133,8 @@ if (form) {
             const isDuplicate = await checkDuplicateRoll(rollNumber, currentStudentId);
             if (isDuplicate) {
                 showMessage("A student with this roll number already exists.", "error");
+                showToast("A student with this roll number already exists.", "error");
+                setLoading(false);
                 return;
             }
 
@@ -119,9 +151,13 @@ if (form) {
             if (error) throw error;
 
             showMessage("Student updated successfully! Redirecting...", "success");
+            showToast("Student updated successfully!", "success");
             setTimeout(redirectToRecords, 1200);
         } catch (error) {
             showMessage(error.message || "Failed to update student.", "error");
+            showToast(error.message || "Failed to update student.", "error");
+        } finally {
+            setLoading(false);
         }
     });
 }
@@ -144,6 +180,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const studentId = getStudentIdFromUrl();
     if (!studentId) {
         showMessage("No student selected. Returning to records.", "error");
+        showToast("No student selected.", "error");
         setTimeout(redirectToRecords, 1200);
         return;
     }
@@ -152,6 +189,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         await loadStudent(studentId);
     } catch (error) {
         showMessage(error.message || "Unable to load student details.", "error");
+        showToast(error.message || "Unable to load student details.", "error");
         setTimeout(redirectToRecords, 1500);
     }
 });

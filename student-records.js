@@ -1,6 +1,7 @@
 const recordsContainer = document.getElementById("recordsContainer");
 const searchInput = document.getElementById("searchInput");
 const logoutBtn = document.getElementById("logoutBtn");
+const toastContainer = document.getElementById("toastContainer");
 let students = [];
 let filteredStudents = [];
 
@@ -8,15 +9,30 @@ function showMessage(text, type = "info") {
     recordsContainer.innerHTML = `<div class="empty-state ${type}">${text}</div>`;
 }
 
+function showToast(text, type = "info") {
+    if (!toastContainer) return;
+
+    const toast = document.createElement("div");
+    toast.className = `toast ${type}`;
+    toast.innerHTML = text;
+    toastContainer.appendChild(toast);
+
+    setTimeout(() => {
+        toast.remove();
+    }, 2600);
+}
+
 async function requireAuth() {
     if (!window.supabaseClient) {
         showMessage("Supabase is unavailable. Please refresh the page.", "error");
+        showToast("Supabase is unavailable.", "error");
         return false;
     }
 
     const { data: { session }, error } = await window.supabaseClient.auth.getSession();
     if (error) {
         showMessage(error.message, "error");
+        showToast(error.message, "error");
         return false;
     }
 
@@ -114,5 +130,6 @@ document.addEventListener("DOMContentLoaded", async () => {
         await fetchStudents();
     } catch (error) {
         showMessage(error.message || "Unable to load student records.", "error");
+        showToast(error.message || "Unable to load student records.", "error");
     }
 });

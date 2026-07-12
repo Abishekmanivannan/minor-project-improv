@@ -4,43 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teacher Registration</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="teacher-register.css">
 </head>
 <body>
+    <div class="background-orb orb-one"></div>
+    <div class="background-orb orb-two"></div>
 
-    <div class="register-container">
+    <div class="auth-shell">
+        <div class="auth-card">
+            <div class="brand-block">
+                <div class="brand-icon">✦</div>
+                <div>
+                    <p class="eyebrow">Join the team</p>
+                    <h1>Student Management System</h1>
+                </div>
+            </div>
 
-        <h1>Student Management System</h1>
+            <h2>Create Teacher Account</h2>
+            <p class="subtitle">Set up your account to start managing student records.</p>
 
-        <h2>Teacher Registration</h2>
+            <form id="registerForm">
+                <label class="field">
+                    <span>Full Name</span>
+                    <div class="input-shell">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="fullname" placeholder="Enter your full name" required>
+                    </div>
+                </label>
 
-        <form id="registerForm">
+                <label class="field">
+                    <span>Email Address</span>
+                    <div class="input-shell">
+                        <span class="input-icon">✉</span>
+                        <input type="email" id="email" placeholder="Enter your email" required>
+                    </div>
+                </label>
 
-            <input type="text" id="fullname" placeholder="Full Name" required>
+                <label class="field">
+                    <span>Password</span>
+                    <div class="input-shell password-shell">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" placeholder="Create a password" required>
+                        <button type="button" class="toggle-password" data-target="password">Show</button>
+                    </div>
+                </label>
 
-            <input type="email" id="email" placeholder="Email Address" required>
+                <div class="strength-meter"><span id="strengthBar"></span></div>
+                <p id="strengthText" class="strength-text">Password strength</p>
 
-            <input type="password" id="password" placeholder="Password" required>
+                <label class="field">
+                    <span>Confirm Password</span>
+                    <div class="input-shell password-shell">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="confirmPassword" placeholder="Confirm your password" required>
+                        <button type="button" class="toggle-password" data-target="confirmPassword">Show</button>
+                    </div>
+                </label>
 
-            <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
+                <button type="submit" class="primary-btn">Register</button>
+                <p id="message" class="message"></p>
+            </form>
 
-            <button type="submit">Register</button>
-
-            <p id="message"></p>
-
-        </form>
-
-        <p>
-            Already have an account?
-            <a href="login.html">Login</a>
-        </p>
-
+            <p class="register-link">
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+        </div>
     </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="supabase-test.js"></script>
     <script src="teacher-register.js"></script>
-
 </body>
 </html>

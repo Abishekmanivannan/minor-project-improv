@@ -4,35 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Student</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="edit-student.css">
 </head>
 <body>
     <div class="page-shell">
         <nav class="top-nav">
-            <div class="brand">Student Management</div>
+            <a class="brand" href="student-registration.html">
+                <span class="brand-mark">SM</span>
+                <span>Student Hub</span>
+            </a>
             <div class="nav-links">
-                <a href="student-registration.html">Student Registration</a>
-                <a href="student-records.html">Student Records</a>
-                <button id="logoutBtn" class="logout-btn" type="button">Logout</button>
+                <a class="nav-link" href="student-registration.html">Student Registration</a>
+                <a class="nav-link" href="student-records.html">Student Records</a>
+                <button id="logoutBtn" class="nav-action logout-btn" type="button">Logout</button>
             </div>
         </nav>
 
-        <div class="card">
-            <h1>Edit Student</h1>
-            <p class="subtitle">Update the selected student's information below.</p>
+        <section class="card">
+            <div class="card-header">
+                <div>
+                    <p class="eyebrow">Profile update</p>
+                    <h1>Edit Student</h1>
+                    <p class="subtitle">Update the selected student’s information below.</p>
+                </div>
+                <div class="status-pill">Editing</div>
+            </div>
 
-            <form id="editStudentForm">
-                <label for="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Full Name" required>
+            <form id="editStudentForm" class="modern-form">
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Name</span>
+                        <div class="input-shell">
+                            <span class="input-icon">👤</span>
+                            <input type="text" id="name" name="name" placeholder="Full Name" required>
+                        </div>
+                    </label>
+                    <label class="field">
+                        <span>Roll Number</span>
+                        <div class="input-shell">
+                            <span class="input-icon">#</span>
+                            <input type="text" id="rollNumber" name="rollNumber" placeholder="Roll Number" required>
+                        </div>
+                    </label>
+                </div>
 
-                <label for="rollNumber">Roll Number</label>
-                <input type="text" id="rollNumber" name="rollNumber" placeholder="Roll Number" required>
-
-                <label for="department">Department</label>
-                <input type="text" id="department" name="department" placeholder="Department" required>
-
-                <label for="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email Address" required>
+                <div class="field-grid">
+                    <label class="field">
+                        <span>Department</span>
+                        <div class="input-shell">
+                            <span class="input-icon">🏛</span>
+                            <input type="text" id="department" name="department" placeholder="Department" required>
+                        </div>
+                    </label>
+                    <label class="field">
+                        <span>Email</span>
+                        <div class="input-shell">
+                            <span class="input-icon">✉</span>
+                            <input type="email" id="email" name="email" placeholder="Email Address" required>
+                        </div>
+                    </label>
+                </div>
 
                 <div class="form-actions">
                     <button type="submit" class="primary-btn">Save Changes</button>
@@ -41,8 +75,10 @@
 
                 <p id="formMessage" class="message"></p>
             </form>
-        </div>
+        </section>
     </div>
+
+    <div id="toastContainer" class="toast-container" aria-live="polite"></div>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
     <script src="supabase-test.js"></script>
